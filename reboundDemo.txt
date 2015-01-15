@@ -1,0 +1,55 @@
+* Download
+
+https://github.com/dfm/emcee
+
+git clone git@github.com:dfm/emcee.git
+
+https://github.com/hannorein/rebound
+
+git clone git@github.com:hannorein/rebound.git
+
+
+* Make shared library
+
+cd rebound/shared && make
+
+cd ..
+
+
+* (0) Make a test
+
+
+import rebound
+
+rebound.particle_add( m=1. )                   
+rebound.particle_add( m=1e-3, x=1., vy=1. )    
+rebound.move_to_center_of_momentum()
+rebound.integrate(100.)
+
+N = rebound.get_N()
+particles = rebound.particles_get()
+
+for i in range(N):
+    print particles[i].x, particles[i].y, particles[i].z
+
+
+
+
+run it
+
+LD_LIBRARY_PATH=rebound/shared/ PYTHONPATH=rebound/python_examples/ python radialvelocity_0.py
+
+
+
+
+* (1) step-by-step
+* (2) plotting orbit
+* (3) plotting radial velocity
+* (4) plot data and model
+* (5) import emcee
+
+LD_LIBRARY_PATH=rebound/shared/ PYTHONPATH=rebound/python_examples/:emcee/ python radialvelocity_5.py
+
+
+
+
